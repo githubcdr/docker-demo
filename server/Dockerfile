@@ -1,5 +1,5 @@
 FROM node:11-alpine AS build
-RUN apk add --update --no-cache python make g++
+RUN apk add --update --no-cache python make g++ && mkdir /src
 COPY src/ /src
 WORKDIR /src
 RUN npm install
@@ -10,6 +10,7 @@ RUN npm run test
 RUN npm prune --production
 
 FROM node:11-alpine
+RUN mkdir /app
 WORKDIR /app
 COPY --from=build /src/node_modules node_modules
 CMD ["node", "/app/server.js"]
