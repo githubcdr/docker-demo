@@ -9,5 +9,5 @@ RUN npm set progress=false && \
 FROM node:11-alpine
 RUN mkdir /app
 WORKDIR /app
-COPY --from=build /usr/src/app/node_modules node_modules
+COPY --from=build /usr/src/app/ .
 CMD ["npm", "start"]
