@@ -2,6 +2,7 @@ FROM node:11-alpine AS build
 RUN apk add --update --no-cache python make g++
 COPY src/ /src
 WORKDIR /src
+RUN npm install
 RUN npm ci
 RUN npm run format
 RUN npm run build
