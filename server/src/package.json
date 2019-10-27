@@ -1,16 +1,16 @@
 {
-  "name": "grpc-finalspace",
+  "name": "grpc-finalspace-server",
   "version": "1.0.0",
-  "description": "gRPC FinalSpace",
-  "main": "main.js",
+  "description": "gRPC FinalSpace server",
+  "main": "server.js",
   "scripts": {
     "test": "echo test",
-    "start": "node main.js",
+    "start": "node server",
     "build": "echo build",
     "format": "echo format c:"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "githubcdr",
+  "license": "MIT",
   "dependencies": {
     "@grpc/proto-loader": "^0.5.2",
     "grpc": "^1.24.1"
