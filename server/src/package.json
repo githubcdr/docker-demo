@@ -1,0 +1,18 @@
+{
+  "name": "grpc-finalspace",
+  "version": "1.0.0",
+  "description": "gRPC FinalSpace",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo test",
+    "start": "node main.js",
+    "build": "echo build",
+    "format": "echo format c:"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@grpc/proto-loader": "^0.5.2",
+    "grpc": "^1.24.1"
+  }
+}
