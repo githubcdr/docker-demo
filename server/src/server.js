@@ -1,5 +1,9 @@
 var PROTO_PATH = __dirname + '/proto/hello.proto';
 var grpc = require('grpc');
+var Redis = require('ioredis');
+var redisport = 6379;
+var redishost = 'redis';
+var redis = new Redis(redisport, redishost);
 var protoLoader = require('@grpc/proto-loader');
 var packageDefinition = protoLoader.loadSync(
     PROTO_PATH,
@@ -10,10 +14,20 @@ var packageDefinition = protoLoader.loadSync(
      oneofs: true
     });
 var hello_proto = grpc.loadPackageDefinition(packageDefinition).helloworld;
+
 function sayHello(call, callback) {
   callback(null, {message: 'Hello ' + call.request.name + ' from ' + process.env.HOSTNAME});
+
+  try {
+    await redis.set(call.request.name, 'Hello');
+  } catch (error) {
+    console.error(error);
+  }
+  redis.disconnect();
+
   console.log('Greeting:', call.request.name);
 }
+
 function main() {
   var server = new grpc.Server();
   server.addService(hello_proto.Greeter.service, {sayHello: sayHello});
