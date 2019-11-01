@@ -6,7 +6,7 @@ const SERVER_ADDRESS = "0.0.0.0:5001";
 
 //Load protobuf
 let proto = grpc.loadPackageDefinition(
-  protoLoader.loadSync("protos/chat.proto", {
+  protoLoader.loadSync("proto/chat.proto", {
     keepCase: true,
     longs: String,
     enums: String,
