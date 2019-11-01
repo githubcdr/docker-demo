@@ -2,7 +2,7 @@ let grpc = require("grpc");
 var protoLoader = require("@grpc/proto-loader");
 
 const server = new grpc.Server();
-const SERVER_ADDRESS = "0.0.0.0:5001";
+const SERVER_ADDRESS = "0.0.0.0:50051";
 
 //Load protobuf
 let proto = grpc.loadPackageDefinition(
