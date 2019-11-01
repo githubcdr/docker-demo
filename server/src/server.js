@@ -18,7 +18,7 @@ var hello_proto = grpc.loadPackageDefinition(packageDefinition).helloworld;
 function sayHello(call, callback) {
   callback(null, {message: 'Hello ' + call.request.name + ' from ' + process.env.HOSTNAME});
   redis.set(call.request.name, 'Hello');
-  redis.disconnect();
+  // redis.disconnect();
   console.log('Greeting:', call.request.name);
 }
 
