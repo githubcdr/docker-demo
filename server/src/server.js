@@ -1,18 +1,24 @@
 var PROTO_PATH = __dirname + '/proto/hello.proto';
-var grpc = require('grpc');
+
 var Redis = require('ioredis');
+var grpc = require('grpc');
+var protoLoader = require('@grpc/proto-loader');
+
 var redisport = 6379;
 var redishost = 'redis';
 var redis = new Redis(redisport, redishost);
-var protoLoader = require('@grpc/proto-loader');
+
 var packageDefinition = protoLoader.loadSync(
     PROTO_PATH,
-    {keepCase: true,
-     longs: String,
-     enums: String,
-     defaults: true,
-     oneofs: true
-    });
+    {
+        keepCase: true,
+        longs: String,
+        enums: String,
+        defaults: true,
+        oneofs: true
+    }
+);
+
 var hello_proto = grpc.loadPackageDefinition(packageDefinition).helloworld;
 
 function sayHello(call, callback) {
@@ -28,4 +34,5 @@ function main() {
   server.bind('0.0.0.0:50051', grpc.ServerCredentials.createInsecure());
   server.start();
 }
+
 main();
