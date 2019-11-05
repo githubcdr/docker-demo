@@ -1,4 +1,4 @@
 # docker-demo
 NodeJS gRPC demo
 
-# push docker tags build..
+# push docker tags build
