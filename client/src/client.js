@@ -19,11 +19,11 @@ function main() {
 	  app.get('/:id', function (req, res) {
 		      user = req.params.id;
 		      client.sayHello({name: user}, function(err, response) {
-			            console.log('Greeting:', response.message);
+			            console.log('Greetings from a new version ok:', response.message);
 			            res.send(response.message);
 			          });
 		    });
-	  app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+	  app.listen(port, () => console.log(`Example app v2 listening on port ${port}!`))
 }
 main();
 
