@@ -16,7 +16,7 @@ var packageDefinition = protoLoader.loadSync(
 var hello_proto = grpc.loadPackageDefinition(packageDefinition).helloworld;
 
 function sayHello(call, callback) {
-  callback(null, {message: 'Hello ' + call.request.name + ' from ' + process.env.HOSTNAME});
+  callback(null, {message: 'Hello from greatest and latest ' + call.request.name + ' from ' + process.env.HOSTNAME});
   redis.set(call.request.name, 'Hello');
   // redis.disconnect();
   console.log('Greeting:', call.request.name);
