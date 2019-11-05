@@ -19,7 +19,7 @@ function main() {
 	  app.get('/:id', function (req, res) {
 		      user = req.params.id;
 		      client.sayHello({name: user}, function(err, response) {
-			            console.log('Greeting:', response.message);
+			            console.log('Greeting from greatest version :', response.message);
 			            res.send(response.message);
 			          });
 		    });
