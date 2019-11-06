@@ -1,5 +1,5 @@
 var PROTO_PATH = __dirname + '/proto/hello.proto';
-const mongo = require('mongodb').MongoClient
+var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://mongodb:27017";
 var grpc = require('grpc');
 var Redis = require('ioredis');
@@ -17,23 +17,21 @@ var packageDefinition = protoLoader.loadSync(
     });
 var hello_proto = grpc.loadPackageDefinition(packageDefinition).helloworld;
 
-mongo.connect(url, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  }, (err, client) => {
-  if (err) {
-    console.error(err)
-    return
-  }
-})
-
-const db = client.db('finalspace')
-const collection = db.collection('peoples')
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  var dbo = db.db("mydb");
+  var myobj = { name: "Company Inc", address: "Highway 37" };
+  dbo.collection("customers").insertOne(myobj, function(err, res) {
+    if (err) throw err;
+    console.log("1 document inserted");
+    db.close();
+  });
+});
 
 function sayHello(call, callback) {
   callback(null, {message: 'Hello from greatest and latest ' + call.request.name + ' from ' + process.env.HOSTNAME});
   redis.set(call.request.name, 'Hello');
-  collection.insertOne({call.request.name: 'Hello' }, (err, result) => {})
+  //collection.insertOne({ 'Hello': "kai" }, (err, result) => {})
   // redis.disconnect();
   console.log('Greeting:', call.request.name);
 }
