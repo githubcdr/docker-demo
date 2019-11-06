@@ -1,4 +1,6 @@
 var PROTO_PATH = __dirname + '/proto/hello.proto';
+const mongo = require('mongodb').MongoClient
+var url = "mongodb://mongodb:27017";
 var grpc = require('grpc');
 var Redis = require('ioredis');
 var redisport = 6379;
@@ -15,9 +17,23 @@ var packageDefinition = protoLoader.loadSync(
     });
 var hello_proto = grpc.loadPackageDefinition(packageDefinition).helloworld;
 
+mongo.connect(url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }, (err, client) => {
+  if (err) {
+    console.error(err)
+    return
+  }
+})
+
+const db = client.db('finalspace')
+const collection = db.collection('peoples')
+
 function sayHello(call, callback) {
   callback(null, {message: 'Hello from greatest and latest ' + call.request.name + ' from ' + process.env.HOSTNAME});
   redis.set(call.request.name, 'Hello');
+  collection.insertOne({call.request.name: 'Hello' }, (err, result) => {})
   // redis.disconnect();
   console.log('Greeting:', call.request.name);
 }
