@@ -13,7 +13,7 @@
   "license": "MIT",
   "dependencies": {
     "@grpc/proto-loader": "^0.5.2",
-    "grpc": "^1.24.1",
+    "grpc": "^1.24.9",
     "ioredis": "^4.14.1",
     "mongodb": "^3.3.3"
   }
